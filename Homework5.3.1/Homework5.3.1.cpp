@@ -17,13 +17,16 @@ class smart_array
 protected:
 	int count = 0;
 	int size = 0;
-public:
 	int* arr;
+public:
+
 	smart_array(int size)
 	{
 		this->size = size;
-		arr = new int[size];
+		this->arr = new int[size]{};
 	}
+	smart_array(const smart_array&) = delete;
+	smart_array& operator=(const smart_array&) = delete;
 	void add_element(int element)
 	{
 		if (count >= size) throw DivisionByZeroException();
@@ -32,7 +35,7 @@ public:
 	}
 	int get_element(int row)
 	{
-		if (row >= size) throw DivisionByZeroException();
+		if (row >= size || row < 0) throw DivisionByZeroException();
 		return arr[row];
 	}
 	~smart_array()
